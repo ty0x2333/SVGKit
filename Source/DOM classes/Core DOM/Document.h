@@ -54,8 +54,8 @@
 
 #import <Foundation/Foundation.h>
 
-/** ObjectiveC won't allow this: @class Node; */
-#import "Node.h"
+/** ObjectiveC won't allow this: @class DOMNode; */
+#import "DOMNode.h"
 @class Element;
 #import "Element.h"
 //@class Comment;
@@ -66,8 +66,8 @@
 #import "DocumentFragment.h"
 @class EntityReference;
 #import "EntityReference.h"
-@class NodeList;
-#import "NodeList.h"
+@class DOMNodeList;
+#import "DOMNodeList.h"
 @class ProcessingInstruction;
 #import "ProcessingInstruction.h"
 @class DocumentType;
@@ -75,7 +75,7 @@
 @class AppleSucksDOMImplementation;
 #import "AppleSucksDOMImplementation.h"
 
-@interface Document : Node
+@interface Document : DOMNode
 
 @property(nonatomic,strong,readonly) DocumentType*     doctype;
 @property(nonatomic,strong,readonly) AppleSucksDOMImplementation*  implementation;
@@ -91,10 +91,10 @@
 -(Attr*) createAttribute:(NSString*) data __attribute__((ns_returns_retained));
 -(EntityReference*) createEntityReference:(NSString*) data __attribute__((ns_returns_retained));
 
--(NodeList*) getElementsByTagName:(NSString*) data;
+-(DOMNodeList*) getElementsByTagName:(NSString*) data;
 
 // Introduced in DOM Level 2:
--(Node*) importNode:(Node*) importedNode deep:(BOOL) deep;
+-(DOMNode*) importNode:(DOMNode*) importedNode deep:(BOOL) deep;
 
 // Introduced in DOM Level 2:
 -(Element*) createElementNS:(NSString*) namespaceURI qualifiedName:(NSString*) qualifiedName __attribute__((ns_returns_retained));
@@ -103,7 +103,7 @@
 -(Attr*) createAttributeNS:(NSString*) namespaceURI qualifiedName:(NSString*) qualifiedName;
 
 // Introduced in DOM Level 2:
--(NodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName;
+-(DOMNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName;
 
 // Introduced in DOM Level 2:
 -(Element*) getElementById:(NSString*) elementId;

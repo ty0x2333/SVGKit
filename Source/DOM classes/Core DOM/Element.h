@@ -48,14 +48,14 @@
 
 #import <Foundation/Foundation.h>
 
-/** objc won't allow this: @class Node;*/
-#import "Node.h"
+/** objc won't allow this: @class DOMNode;*/
+#import "DOMNode.h"
 @class Attr;
 #import "Attr.h"
-@class NodeList;
-#import "NodeList.h"
+@class DOMNodeList;
+#import "DOMNodeList.h"
 
-@interface Element : Node
+@interface Element : DOMNode
 
 @property(nonatomic,strong,readonly) NSString* tagName;
 
@@ -65,7 +65,7 @@
 -(Attr*) getAttributeNode:(NSString*) name;
 -(Attr*) setAttributeNode:(Attr*) newAttr;
 -(Attr*) removeAttributeNode:(Attr*) oldAttr;
--(NodeList*) getElementsByTagName:(NSString*) name;
+-(DOMNodeList*) getElementsByTagName:(NSString*) name;
 
 // Introduced in DOM Level 2:
 -(NSString*) getAttributeNS:(NSString*) namespaceURI localName:(NSString*) localName;
@@ -83,7 +83,7 @@
 -(Attr*) setAttributeNodeNS:(Attr*) newAttr;
 
 // Introduced in DOM Level 2:
--(NodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName;
+-(DOMNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName;
 
 // Introduced in DOM Level 2:
 -(BOOL) hasAttribute:(NSString*) name;

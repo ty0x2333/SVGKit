@@ -16,13 +16,13 @@
  */
 #import <Foundation/Foundation.h>
 
-@class Node;
-#import "Node.h"
+@class DOMNode;
+#import "DOMNode.h"
 
-@interface NodeList : NSObject <NSFastEnumeration>
+@interface DOMNodeList : NSObject <NSFastEnumeration>
 
 @property(readonly) NSUInteger length;
 
--(Node*) item:(NSUInteger) index;
+-(DOMNode*) item:(NSUInteger) index;
 
 @end

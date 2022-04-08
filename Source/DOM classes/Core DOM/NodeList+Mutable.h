@@ -2,9 +2,9 @@
  Makes the writable properties all package-private, effectively
  */
 
-#import "NodeList.h"
+#import "DOMNodeList.h"
 
-@interface NodeList()
+@interface DOMNodeList()
 
 @property(nonatomic,strong) NSMutableArray* internalArray;
 

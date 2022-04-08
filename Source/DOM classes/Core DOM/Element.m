@@ -95,9 +95,9 @@
 	return oldAttr;
 }
 
--(NodeList*) getElementsByTagName:(NSString*) name
+-(DOMNodeList*) getElementsByTagName:(NSString*) name
 {
-	NodeList* accumulator = [[NodeList alloc] init];
+	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:name inNamespace:nil childrenOfElement:self addToList:accumulator];
 	
 	return accumulator;
@@ -144,9 +144,9 @@
 }
 
 // Introduced in DOM Level 2:
--(NodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
+-(DOMNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
 {
-	NodeList* accumulator = [[NodeList alloc] init];
+	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:localName inNamespace:namespaceURI childrenOfElement:self addToList:accumulator];
 	
 	return accumulator;

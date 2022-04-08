@@ -6,6 +6,6 @@
 
 @interface SVGSwitchElement : SVGElement <ConverterSVGToCALayer>
 
-@property (nonatomic, readonly, strong) NodeList * visibleChildNodes;
+@property (nonatomic, readonly, strong) DOMNodeList * visibleChildNodes;
 
 @end

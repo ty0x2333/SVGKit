@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Node.h"
+#import "DOMNode.h"
 #import "Node+Mutable.h"
 
 #import "NodeList+Mutable.h"
@@ -14,7 +14,7 @@
 
 #import "NamedNodeMap_Iterable.h" // Needed for the optional (non-SVG spec) "recursive toXML" method
 
-@implementation Node
+@implementation DOMNode
 
 @synthesize nodeName;
 @synthesize nodeValue;
@@ -79,7 +79,7 @@
 			}break;
 		}
 		
-		self.childNodes = [[NodeList alloc] init];
+		self.childNodes = [[DOMNodeList alloc] init];
     }
     return self;
 }
@@ -123,7 +123,7 @@
 			}break;
 		}
 		
-		self.childNodes = [[NodeList alloc] init];
+		self.childNodes = [[DOMNodeList alloc] init];
     }
     return self;
 }
@@ -173,7 +173,7 @@
 
 #pragma mark - Official DOM method implementations
 
--(Node *)firstChild
+-(DOMNode *)firstChild
 {
     if( [self.childNodes length] < 1 )
         return nil;
@@ -181,7 +181,7 @@
         return [self.childNodes item:0];
 }
 
--(Node *)lastChild
+-(DOMNode *)lastChild
 {
     if( [self.childNodes length] < 1 )
         return nil;
@@ -189,7 +189,7 @@
         return [self.childNodes item: [self.childNodes length] - 1];
 }
 
--(Node *)previousSibling
+-(DOMNode *)previousSibling
 {
     if( self.parentNode == nil )
         return nil;
@@ -204,7 +204,7 @@
     }
 }
 
--(Node *)nextSibling
+-(DOMNode *)nextSibling
 {
     if( self.parentNode == nil )
         return nil;
@@ -219,7 +219,7 @@
     }
 }
 
--(Node*) insertBefore:(Node*) newChild refChild:(Node*) refChild
+-(DOMNode*) insertBefore:(DOMNode*) newChild refChild:(DOMNode*) refChild
 {
 	if( refChild == nil )
 	{
@@ -234,7 +234,7 @@
 	return newChild;
 }
 
--(Node*) replaceChild:(Node*) newChild oldChild:(Node*) oldChild
+-(DOMNode*) replaceChild:(DOMNode*) newChild oldChild:(DOMNode*) oldChild
 {
 	if( newChild.nodeType == DOMNodeType_DOCUMENT_FRAGMENT_NODE )
 	{
@@ -247,7 +247,7 @@
 		
 		NSAssert( FALSE, @"We should be recursing down the tree to find 'newChild' at any location, and removing it - required by spec - but we have no convenience method for that search, yet" );
 		
-		for( Node* child in newChild.childNodes.internalArray )
+		for( DOMNode* child in newChild.childNodes.internalArray )
 		{
 			[self.childNodes.internalArray insertObject:child atIndex:oldIndex++];
 		}
@@ -267,7 +267,7 @@
 		return oldChild;
 	}
 }
--(Node*) removeChild:(Node*) oldChild
+-(DOMNode*) removeChild:(DOMNode*) oldChild
 {
 	[self.childNodes.internalArray removeObject:oldChild];
 	
@@ -276,7 +276,7 @@
 	return oldChild;
 }
 
--(Node*) appendChild:(Node*) newChild
+-(DOMNode*) appendChild:(DOMNode*) newChild
 {
 	[self.childNodes.internalArray removeObject:newChild]; // required by spec
 	[self.childNodes.internalArray addObject:newChild];
@@ -291,7 +291,7 @@
 	return (self.childNodes.length > 0);
 }
 
--(Node*) cloneNode:(BOOL) deep
+-(DOMNode*) cloneNode:(BOOL) deep
 {
 	NSAssert( FALSE, @"Not implemented yet - read the spec. Sounds tricky. I'm too tired, and would probably screw it up right now" );
 	return nil;
@@ -347,7 +347,7 @@
 			 "concatenation of the textContent attribute value of every child node, excluding COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes. This is the empty string if the node has no children."
 			 */
 			NSMutableString* stringAccumulator = [[NSMutableString alloc] init];
-			for( Node* subNode in self.childNodes.internalArray )
+			for( DOMNode* subNode in self.childNodes.internalArray )
 			{
 				NSString* subText = subNode.textContent; // don't call this method twice; it's expensive to calculate!
 				if( subText != nil ) // Yes, really: Apple docs require that you never append a nil substring. Sigh
@@ -487,7 +487,7 @@
 	/** ... output them, making them 'active' in the output tree */
 	for( NSString* xmlnsNodeName in xmlnsNodemap )
 	{
-		Node* attribute = [xmlnsNodemap objectForKey:xmlnsNodeName];
+		DOMNode* attribute = [xmlnsNodemap objectForKey:xmlnsNodeName];
 		
 		if( [prefixesByACTIVENamespace objectForKey:xmlnsNodeName] == nil )
 		{
@@ -534,7 +534,7 @@
 		NSDictionary* nodeMap = [nodeMapsByNamespace objectForKey:namespace];
 		for( NSString* nodeNameFromMap in nodeMap )
 		{
-			Node* attribute = [nodeMap objectForKey:nodeNameFromMap];
+			DOMNode* attribute = [nodeMap objectForKey:nodeNameFromMap];
 			
 			attribute.prefix = localPrefix; /** Overrides any default pre-existing value */
 			
@@ -595,7 +595,7 @@
 		case DOMNodeType_DOCUMENT_NODE:
 		case DOMNodeType_ELEMENT_NODE:
 		{
-			for( Node* child in self.childNodes )
+			for( DOMNode* child in self.childNodes )
 			{
 				[child appendXMLToString:outputString availableNamespaces:prefixesByKNOWNNamespace activeNamespaces:prefixesByACTIVENamespace];
 			}

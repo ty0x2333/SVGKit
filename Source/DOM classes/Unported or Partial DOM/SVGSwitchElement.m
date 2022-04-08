@@ -18,12 +18,12 @@
     return _layer;
 }
 
-- (NodeList *)visibleChildNodes
+- (DOMNodeList *)visibleChildNodes
 {
     if (_visibleChildNodes)
         return _visibleChildNodes;
     
-    _visibleChildNodes = [[NodeList alloc] init];
+    _visibleChildNodes = [[DOMNodeList alloc] init];
     
     NSString* localLanguage = [[NSLocale preferredLanguages] firstObject];
     

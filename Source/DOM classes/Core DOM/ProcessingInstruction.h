@@ -13,10 +13,10 @@
 
 #import <Foundation/Foundation.h>
 
-/** objc won't allow this: @class Node;*/
-#import "Node.h"
+/** objc won't allow this: @class DOMNode;*/
+#import "DOMNode.h"
 
-@interface ProcessingInstruction : Node
+@interface ProcessingInstruction : DOMNode
 @property(nonatomic,strong,readonly) NSString* target;
 @property(nonatomic,strong,readonly) NSString* data;
 

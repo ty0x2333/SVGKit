@@ -32,7 +32,7 @@
     return _supportedTags;
 }
 
--(Node *)handleStartElement:(NSString *)name document:(SVGKSource *)document namePrefix:(NSString *)prefix namespaceURI:(NSString *)XMLNSURI attributes:(NSMutableDictionary *)attributes parseResult:(SVGKParseResult *)parseResult parentNode:(Node *)parentNode
+-(DOMNode *)handleStartElement:(NSString *)name document:(SVGKSource *)document namePrefix:(NSString *)prefix namespaceURI:(NSString *)XMLNSURI attributes:(NSMutableDictionary *)attributes parseResult:(SVGKParseResult *)parseResult parentNode:(DOMNode *)parentNode
 {
 	if( [[self supportedNamespaces] containsObject:XMLNSURI] )
 	{
@@ -57,7 +57,7 @@
 		return nil;
 }
 
--(void)handleEndElement:(Node *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
+-(void)handleEndElement:(DOMNode *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
 {
 	/** This is where the magic happens ... */
 		NSString* c = [newNode.textContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

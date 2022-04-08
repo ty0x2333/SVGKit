@@ -60,16 +60,16 @@
 	return nil;
 }
 
--(NodeList*) getElementsByTagName:(NSString*) data
+-(DOMNodeList*) getElementsByTagName:(NSString*) data
 {
-	NodeList* accumulator = [[NodeList alloc] init];
+	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:data inNamespace:nil childrenOfElement:self.documentElement addToList:accumulator];
 	
 	return accumulator;
 }
 
 // Introduced in DOM Level 2:
--(Node*) importNode:(Node*) importedNode deep:(BOOL) deep
+-(DOMNode*) importNode:(DOMNode*) importedNode deep:(BOOL) deep
 {
 	NSAssert( FALSE, @"Not implemented." );
 	return nil;
@@ -94,9 +94,9 @@
 }
 
 // Introduced in DOM Level 2:
--(NodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
+-(DOMNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
 {
-	NodeList* accumulator = [[NodeList alloc] init];
+	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:localName inNamespace:namespaceURI childrenOfElement:self.documentElement addToList:accumulator];
 	
 	return accumulator;
