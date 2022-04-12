@@ -587,8 +587,8 @@
 	 */
     NSString* localStyleValue = [self.style getPropertyValue:stylableProperty];
     
-    if( localStyleValue != nil )
-        return localStyleValue;
+//    if( localStyleValue != nil )
+//        return localStyleValue;
     
     /** we have a locally declared CSS class; let's go hunt for it in the document's stylesheets */
     
@@ -625,8 +625,19 @@
             }
         }
         
-        if( mostSpecificRule != nil )
+        if( mostSpecificRule != nil ) {
+            NSString *result = [mostSpecificRule.style getPropertyValue:stylableProperty];
+            if ([result containsString:@"!important"]) {
+                return [[result stringByReplacingOccurrencesOfString:@"!important" withString:@""] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+            }
+            if (localStyleValue != nil) {
+                return localStyleValue;
+            }
             return [mostSpecificRule.style getPropertyValue:stylableProperty];
+        }
+        if (localStyleValue != nil) {
+            return localStyleValue;
+        }
     }
     
     /** if there's a local property, use that */
