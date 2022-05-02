@@ -28,7 +28,7 @@
 
 - (id)init
 {
-    self = [super initType:DOMNodeType_DOCUMENT_NODE name:@"#document"];
+    self = [super initType:SVGCNodeType_DOCUMENT_NODE name:@"#document"];
     if (self) {
         
     }
@@ -79,7 +79,7 @@
 
 /** implementation of allPrefixesByNamespace - stores "namespace string" : "ARRAY of prefix strings"
  */
-+(void) accumulateNamespacesForNode:(DOMNode*) node intoDictionary:(NSMutableDictionary*) output
++(void) accumulateNamespacesForNode:(SVGCNode*) node intoDictionary:(NSMutableDictionary*) output
 {
 	/**
 	 First, find all the attributes that declare a new Namespace at this point */
@@ -90,7 +90,7 @@
 	
 	for( NSString* xmlnsNodeName in xmlnsNodemap )
 	{
-		DOMNode* namespaceDeclaration = [xmlnsNodemap objectForKey:xmlnsNodeName];
+		SVGCNode* namespaceDeclaration = [xmlnsNodemap objectForKey:xmlnsNodeName];
 		
 		NSMutableArray* prefixesForNamespace = [output objectForKey:namespaceDeclaration.nodeValue];
 		if( prefixesForNamespace == nil )
@@ -103,7 +103,7 @@
 			[prefixesForNamespace addObject:namespaceDeclaration.localName];
 	}
 	
-	for( DOMNode* childNode in node.childNodes )
+	for( SVGCNode* childNode in node.childNodes )
 	{
 		[self accumulateNamespacesForNode:childNode intoDictionary:output];
 	}

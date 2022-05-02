@@ -2,9 +2,9 @@
  Makes the writable properties all package-private, effectively
  */
 
-#import "DOMNodeList.h"
+#import "SVGCNodeList.h"
 
-@interface DOMNodeList()
+@interface SVGCNodeList()
 
 @property(nonatomic,strong) NSMutableArray* internalArray;
 

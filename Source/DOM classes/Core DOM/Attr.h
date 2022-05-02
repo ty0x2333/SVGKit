@@ -15,11 +15,11 @@
 */
 #import <Foundation/Foundation.h>
 
-/** objc won't allow this: @class DOMNode;*/
-#import "DOMNode.h"
+/** objc won't allow this: @class SVGCNode;*/
+#import "SVGCNode.h"
 @class Element;
 
-@interface Attr : DOMNode
+@interface Attr : SVGCNode
 
 /*! NB: The official DOM spec FAILS TO SPECIFY what the value of "name" is */
 @property(nonatomic,strong,readonly) NSString* name;

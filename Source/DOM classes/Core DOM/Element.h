@@ -48,14 +48,14 @@
 
 #import <Foundation/Foundation.h>
 
-/** objc won't allow this: @class DOMNode;*/
-#import "DOMNode.h"
+/** objc won't allow this: @class SVGCNode;*/
+#import "SVGCNode.h"
 @class Attr;
 #import "Attr.h"
-@class DOMNodeList;
-#import "DOMNodeList.h"
+@class SVGCNodeList;
+#import "SVGCNodeList.h"
 
-@interface Element : DOMNode
+@interface Element : SVGCNode
 
 @property(nonatomic,strong,readonly) NSString* tagName;
 
@@ -65,7 +65,7 @@
 -(Attr*) getAttributeNode:(NSString*) name;
 -(Attr*) setAttributeNode:(Attr*) newAttr;
 -(Attr*) removeAttributeNode:(Attr*) oldAttr;
--(DOMNodeList*) getElementsByTagName:(NSString*) name;
+-(SVGCNodeList*) getElementsByTagName:(NSString*) name;
 
 // Introduced in DOM Level 2:
 -(NSString*) getAttributeNS:(NSString*) namespaceURI localName:(NSString*) localName;
@@ -83,7 +83,7 @@
 -(Attr*) setAttributeNodeNS:(Attr*) newAttr;
 
 // Introduced in DOM Level 2:
--(DOMNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName;
+-(SVGCNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName;
 
 // Introduced in DOM Level 2:
 -(BOOL) hasAttribute:(NSString*) name;

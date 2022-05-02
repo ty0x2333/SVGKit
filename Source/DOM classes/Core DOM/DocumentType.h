@@ -17,10 +17,10 @@
 */
 #import <Foundation/Foundation.h>
 
-#import "DOMNode.h"
+#import "SVGCNode.h"
 #import "NamedNodeMap.h"
 
-@interface DocumentType : DOMNode
+@interface DocumentType : SVGCNode
 
 @property(nonatomic,strong,readonly) NSString* name;
 @property(nonatomic,strong,readonly) NamedNodeMap* entities;

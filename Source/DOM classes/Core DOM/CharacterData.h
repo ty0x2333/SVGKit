@@ -30,10 +30,10 @@
 
 #import <Foundation/Foundation.h>
 
-/** objc won't allow this: @class DOMNode;*/
-#import "DOMNode.h"
+/** objc won't allow this: @class SVGCNode;*/
+#import "SVGCNode.h"
 
-@interface CharacterData : DOMNode
+@interface CharacterData : SVGCNode
 
 @property(nonatomic,strong,readonly) NSString* data;
 	

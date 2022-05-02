@@ -16,13 +16,13 @@
  */
 #import <Foundation/Foundation.h>
 
-@class DOMNode;
-#import "DOMNode.h"
+@class SVGCNode;
+#import "SVGCNode.h"
 
-@interface DOMNodeList : NSObject <NSFastEnumeration>
+@interface SVGCNodeList : NSObject <NSFastEnumeration>
 
 @property(readonly) NSUInteger length;
 
--(DOMNode*) item:(NSUInteger) index;
+-(SVGCNode*) item:(NSUInteger) index;
 
 @end

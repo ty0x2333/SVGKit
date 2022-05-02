@@ -1,7 +1,7 @@
-#import "DOMNodeList.h"
+#import "SVGCNodeList.h"
 #import "NodeList+Mutable.h"
 
-@implementation DOMNodeList
+@implementation SVGCNodeList
 
 @synthesize internalArray;
 
@@ -15,7 +15,7 @@
 }
 
 
--(DOMNode*) item:(NSUInteger) index
+-(SVGCNode*) item:(NSUInteger) index
 {
 	return [self.internalArray objectAtIndex:index];
 }

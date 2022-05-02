@@ -13,7 +13,7 @@
 
 
 - (id)initWithLocalName:(NSString*) n attributes:(NSMutableDictionary*) attributes {
-    self = [super initType:DOMNodeType_ELEMENT_NODE name:n];
+    self = [super initType:SVGCNodeType_ELEMENT_NODE name:n];
     if (self) {
         self.tagName = n;
 		
@@ -26,7 +26,7 @@
 }
 - (id)initWithQualifiedName:(NSString*) n inNameSpaceURI:(NSString*) nsURI attributes:(NSMutableDictionary *)attributes
 {
-    self = [super initType:DOMNodeType_ELEMENT_NODE name:n inNamespace:nsURI];
+    self = [super initType:SVGCNodeType_ELEMENT_NODE name:n inNamespace:nsURI];
     if (self) {
         self.tagName = n;
 		
@@ -95,9 +95,9 @@
 	return oldAttr;
 }
 
--(DOMNodeList*) getElementsByTagName:(NSString*) name
+-(SVGCNodeList*) getElementsByTagName:(NSString*) name
 {
-	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
+	SVGCNodeList* accumulator = [[SVGCNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:name inNamespace:nil childrenOfElement:self addToList:accumulator];
 	
 	return accumulator;
@@ -144,9 +144,9 @@
 }
 
 // Introduced in DOM Level 2:
--(DOMNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
+-(SVGCNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
 {
-	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
+	SVGCNodeList* accumulator = [[SVGCNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:localName inNamespace:namespaceURI childrenOfElement:self addToList:accumulator];
 	
 	return accumulator;

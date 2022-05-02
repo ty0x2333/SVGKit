@@ -38,7 +38,7 @@
 	return [NSMutableArray arrayWithObjects:@"pattern", nil];
 }
 
-- (DOMNode*)handleStartElement:(NSString *)name document:(SVGKSource*) document namePrefix:(NSString*)prefix namespaceURI:(NSString*) XMLNSURI attributes:(NSMutableDictionary *)attributes parseResult:(SVGKParseResult*) parseResult parentNode:(DOMNode*) parentNode
+- (SVGCNode*)handleStartElement:(NSString *)name document:(SVGKSource*) document namePrefix:(NSString*)prefix namespaceURI:(NSString*) XMLNSURI attributes:(NSMutableDictionary *)attributes parseResult:(SVGKParseResult*) parseResult parentNode:(SVGCNode*) parentNode
 {
 		
 	NSAssert( FALSE, @"Patterns are not supported by SVGKit yet - no-one has implemented them" );
@@ -46,7 +46,7 @@
 	return nil;
 }
 
--(void)handleEndElement:(DOMNode *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
+-(void)handleEndElement:(SVGCNode *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
 {
 	
 }

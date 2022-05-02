@@ -1,5 +1,5 @@
 /*
-//  DOMNode.h
+//  SVGCNode.h
 *
  http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1950641247
  
@@ -78,53 +78,53 @@
 
 @class Document;
 /** objc won't allow this: #import "Document.h"*/
-@class DOMNodeList;
+@class SVGCNodeList;
 /** objc won't allow this: #import "NodeList.h"*/
 @class NamedNodeMap;
 /** objc won't allow this: #import "NamedNodeMap.h"*/
 
-typedef enum DOMNodeType
+typedef enum SVGCNodeType
 {
-	DOMNodeType_ELEMENT_NODE                   = 1,
-	DOMNodeType_ATTRIBUTE_NODE                 = 2,
-	DOMNodeType_TEXT_NODE                      = 3,
-	DOMNodeType_CDATA_SECTION_NODE             = 4,
-	DOMNodeType_ENTITY_REFERENCE_NODE          = 5,
-	DOMNodeType_ENTITY_NODE                    = 6,
-	DOMNodeType_PROCESSING_INSTRUCTION_NODE    = 7,
-	DOMNodeType_COMMENT_NODE                   = 8,
-	DOMNodeType_DOCUMENT_NODE                  = 9,
-	DOMNodeType_DOCUMENT_TYPE_NODE             = 10,
-	DOMNodeType_DOCUMENT_FRAGMENT_NODE         = 11,
-	DOMNodeType_NOTATION_NODE                  = 12
-} DOMNodeType;
+	SVGCNodeType_ELEMENT_NODE                   = 1,
+	SVGCNodeType_ATTRIBUTE_NODE                 = 2,
+	SVGCNodeType_TEXT_NODE                      = 3,
+	SVGCNodeType_CDATA_SECTION_NODE             = 4,
+	SVGCNodeType_ENTITY_REFERENCE_NODE          = 5,
+	SVGCNodeType_ENTITY_NODE                    = 6,
+	SVGCNodeType_PROCESSING_INSTRUCTION_NODE    = 7,
+	SVGCNodeType_COMMENT_NODE                   = 8,
+	SVGCNodeType_DOCUMENT_NODE                  = 9,
+	SVGCNodeType_DOCUMENT_TYPE_NODE             = 10,
+	SVGCNodeType_DOCUMENT_FRAGMENT_NODE         = 11,
+	SVGCNodeType_NOTATION_NODE                  = 12
+} SVGCNodeType;
 
-@interface DOMNode : NSObject
+@interface SVGCNode : NSObject
 
 @property(nonatomic,strong,readonly) NSString* nodeName;
 @property(nonatomic,strong,readonly) NSString* nodeValue;
 	
-@property(nonatomic,readonly) DOMNodeType nodeType;
-@property(nonatomic,weak,readonly) DOMNode* parentNode;
-@property(nonatomic,strong,readonly) DOMNodeList* childNodes;
-@property(nonatomic,weak,readonly) DOMNode* firstChild;
-@property(nonatomic,weak,readonly) DOMNode* lastChild;
-@property(nonatomic,weak,readonly) DOMNode* previousSibling;
-@property(nonatomic,weak,readonly) DOMNode* nextSibling;
+@property(nonatomic,readonly) SVGCNodeType nodeType;
+@property(nonatomic,weak,readonly) SVGCNode* parentNode;
+@property(nonatomic,strong,readonly) SVGCNodeList* childNodes;
+@property(nonatomic,weak,readonly) SVGCNode* firstChild;
+@property(nonatomic,weak,readonly) SVGCNode* lastChild;
+@property(nonatomic,weak,readonly) SVGCNode* previousSibling;
+@property(nonatomic,weak,readonly) SVGCNode* nextSibling;
 @property(nonatomic,strong,readonly) NamedNodeMap* attributes; /**< NB: according to DOM Spec, this is null if the Node is NOT subclassed as an Element */
 
 // Modified in DOM Level 2:
 @property(nonatomic,weak,readonly) Document* ownerDocument;
 
--(DOMNode*) insertBefore:(DOMNode*) newChild refChild:(DOMNode*) refChild;
+-(SVGCNode*) insertBefore:(SVGCNode*) newChild refChild:(SVGCNode*) refChild;
 
--(DOMNode*) replaceChild:(DOMNode*) newChild oldChild:(DOMNode*) oldChild;
--(DOMNode*) removeChild:(DOMNode*) oldChild;
--(DOMNode*) appendChild:(DOMNode*) newChild;
+-(SVGCNode*) replaceChild:(SVGCNode*) newChild oldChild:(SVGCNode*) oldChild;
+-(SVGCNode*) removeChild:(SVGCNode*) oldChild;
+-(SVGCNode*) appendChild:(SVGCNode*) newChild;
 
 @property(nonatomic) BOOL hasChildNodes;
 
--(DOMNode*) cloneNode:(BOOL) deep;
+-(SVGCNode*) cloneNode:(BOOL) deep;
 
 // Modified in DOM Level 2:
 -(void) normalize;
@@ -151,10 +151,10 @@ typedef enum DOMNodeType
 
 #pragma mark - Objective-C init methods (not in SVG Spec - you're supposed to use SVGDocument's createXXX methods instead)
 /** Designated initializers - 2 pairs (one for DOM 1, no namespace, the other for DOM 2, with namespace) of 2 methods (one for nodes that REQUIRE a value, the other for nodes that MUST NOT have a value) */
-- (id)initType:(DOMNodeType) nt name:(NSString*) n;
-- (id)initType:(DOMNodeType) nt name:(NSString*) n value:(NSString*) v;
-- (id)initType:(DOMNodeType) nt name:(NSString*) n inNamespace:(NSString*) nsURI;
-- (id)initType:(DOMNodeType) nt name:(NSString*) n value:(NSString*) v inNamespace:(NSString*) nsURI;
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n;
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n value:(NSString*) v;
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n inNamespace:(NSString*) nsURI;
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n value:(NSString*) v inNamespace:(NSString*) nsURI;
 
 #pragma mark - Objective-C serialization method to serialize a DOM tree back to XML (used heavily in SVGKit's output/conversion features)
 

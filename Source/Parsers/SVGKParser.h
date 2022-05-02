@@ -57,7 +57,7 @@
 	NSMutableString *_storedChars;
 	//NSMutableArray *_elementStack;
 	NSMutableArray * _stackOfParserExtensions;
-	DOMNode * _parentOfCurrentNode;
+	SVGCNode * _parentOfCurrentNode;
 }
 
 @property(nonatomic,strong,readonly) SVGKSource* source;

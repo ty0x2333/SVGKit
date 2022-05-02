@@ -20,7 +20,7 @@
 	return [NSMutableArray array];
 }
 
-- (DOMNode*) handleStartElement:(NSString *)name document:(SVGKSource*) SVGKSource namePrefix:(NSString*)prefix namespaceURI:(NSString*) XMLNSURI attributes:(NSMutableDictionary *)attributeObjects parseResult:(SVGKParseResult *)parseResult parentNode:(DOMNode*) parentNode
+- (SVGCNode*) handleStartElement:(NSString *)name document:(SVGKSource*) SVGKSource namePrefix:(NSString*)prefix namespaceURI:(NSString*) XMLNSURI attributes:(NSMutableDictionary *)attributeObjects parseResult:(SVGKParseResult *)parseResult parentNode:(SVGCNode*) parentNode
 {
 	if( [[self supportedNamespaces] count] == 0
 	|| [[self supportedNamespaces] containsObject:XMLNSURI] ) // unnecesary here, but allows safe updates to this parser's matching later
@@ -37,7 +37,7 @@
 	return nil;
 }
 
--(void)handleEndElement:(DOMNode *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
+-(void)handleEndElement:(SVGCNode *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
 {
 	
 }
@@ -53,22 +53,22 @@
 {
 	switch( item.nodeType )
 	{
-		case DOMNodeType_ATTRIBUTE_NODE:
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-		case DOMNodeType_DOCUMENT_NODE:
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
-		case DOMNodeType_ELEMENT_NODE:
-		case DOMNodeType_ENTITY_NODE:
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
-		case DOMNodeType_NOTATION_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
+		case SVGCNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_NOTATION_NODE:
 		{
 			return FALSE; // do nothing, according to the table in : http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1950641247
 		} break;
 			
-		case DOMNodeType_CDATA_SECTION_NODE:
-		case DOMNodeType_COMMENT_NODE:
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-		case DOMNodeType_TEXT_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_COMMENT_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_TEXT_NODE:
 		{
 			return TRUE;
 		} break;
@@ -79,22 +79,22 @@
 {
 	switch( node.nodeType )
 	{
-		case DOMNodeType_ATTRIBUTE_NODE:
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-		case DOMNodeType_DOCUMENT_NODE:
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
-		case DOMNodeType_ELEMENT_NODE:
-		case DOMNodeType_ENTITY_NODE:
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
-		case DOMNodeType_NOTATION_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
+		case SVGCNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_NOTATION_NODE:
 		{
 			// do nothing, according to the table in : http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1950641247
 		} break;
 			
-		case DOMNodeType_CDATA_SECTION_NODE:
-		case DOMNodeType_COMMENT_NODE:
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-		case DOMNodeType_TEXT_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_COMMENT_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_TEXT_NODE:
 		{
 			node.nodeValue = content;
 		} break;

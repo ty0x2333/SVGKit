@@ -12,7 +12,7 @@
 
 - (id)init
 {
-    self = [super initType:DOMNodeType_DOCUMENT_FRAGMENT_NODE name:nil];
+    self = [super initType:SVGCNodeType_DOCUMENT_FRAGMENT_NODE name:nil];
     if (self) {
 		
     }

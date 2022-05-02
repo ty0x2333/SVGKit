@@ -11,7 +11,7 @@
  */
 #import <Foundation/Foundation.h>
 
-@class DOMNode, DOMNodeList, Element; // avoiding #import here, to avoid C header loop problems.
+@class SVGCNode, SVGCNodeList, Element; // avoiding #import here, to avoid C header loop problems.
 
 #define DEBUG_DOM_MATCH_ELEMENTS_IDS_AND_NAMES 0 // For debugging SVGKit: causes debug output on getElementById etc
 
@@ -20,10 +20,10 @@
 /*! This useful method provides both the DOM level 1 and the DOM level 2 implementations of searching the tree for a node - because THEY ARE DIFFERENT
  yet very similar
  */
-+(void) privateGetElementsByName:(NSString*) name inNamespace:(NSString*) namespaceURI childrenOfElement:(DOMNode*) parent addToList:(DOMNodeList*) accumulator;
++(void) privateGetElementsByName:(NSString*) name inNamespace:(NSString*) namespaceURI childrenOfElement:(SVGCNode*) parent addToList:(SVGCNodeList*) accumulator;
 
 /*! This is used in multiple base classes in DOM 1 and DOM 2 where they do NOT have shared superclasses, so we have to implement it here in a separate
  clas as a standalone method */
-+(Element*) privateGetElementById:(NSString*) idValue childrenOfElement:(DOMNode*) parent;
++(Element*) privateGetElementById:(NSString*) idValue childrenOfElement:(SVGCNode*) parent;
 
 @end

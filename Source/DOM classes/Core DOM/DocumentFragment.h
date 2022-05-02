@@ -9,9 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-/** objc won't allow this: @class DOMNode;*/
-#import "DOMNode.h"
+/** objc won't allow this: @class SVGCNode;*/
+#import "SVGCNode.h"
 
-@interface DocumentFragment : DOMNode
+@interface DocumentFragment : SVGCNode
 
 @end

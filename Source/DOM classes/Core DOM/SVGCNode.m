@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "DOMNode.h"
+#import "SVGCNode.h"
 #import "Node+Mutable.h"
 
 #import "NodeList+Mutable.h"
@@ -14,7 +14,7 @@
 
 #import "NamedNodeMap_Iterable.h" // Needed for the optional (non-SVG spec) "recursive toXML" method
 
-@implementation DOMNode
+@implementation SVGCNode
 
 @synthesize nodeName;
 @synthesize nodeValue;
@@ -39,7 +39,7 @@
     return nil;
 }
 
-- (id)initType:(DOMNodeType) nt name:(NSString*) n value:(NSString*) v
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n value:(NSString*) v
 {
 	if( [v isKindOfClass:[NSMutableString class]])
 	{
@@ -54,24 +54,24 @@
         switch( nt )
 		{
 				
-			case DOMNodeType_ATTRIBUTE_NODE:
-			case DOMNodeType_CDATA_SECTION_NODE:
-			case DOMNodeType_COMMENT_NODE:
-			case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-			case DOMNodeType_TEXT_NODE:
+			case SVGCNodeType_ATTRIBUTE_NODE:
+			case SVGCNodeType_CDATA_SECTION_NODE:
+			case SVGCNodeType_COMMENT_NODE:
+			case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+			case SVGCNodeType_TEXT_NODE:
 			{
 				self.nodeName = n;
 				self.nodeValue = v;
 			}break;
 			
 				
-			case DOMNodeType_DOCUMENT_NODE:
-			case DOMNodeType_DOCUMENT_TYPE_NODE:
-			case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-			case DOMNodeType_ENTITY_REFERENCE_NODE:
-			case DOMNodeType_ENTITY_NODE:
-			case DOMNodeType_NOTATION_NODE:
-			case DOMNodeType_ELEMENT_NODE:
+			case SVGCNodeType_DOCUMENT_NODE:
+			case SVGCNodeType_DOCUMENT_TYPE_NODE:
+			case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+			case SVGCNodeType_ENTITY_REFERENCE_NODE:
+			case SVGCNodeType_ENTITY_NODE:
+			case SVGCNodeType_NOTATION_NODE:
+			case SVGCNodeType_ELEMENT_NODE:
 			{
 				NSAssert( FALSE, @"NodeType = %i cannot be init'd with a value; nodes of that type have no value in the DOM spec", nt);
 				
@@ -79,12 +79,12 @@
 			}break;
 		}
 		
-		self.childNodes = [[DOMNodeList alloc] init];
+		self.childNodes = [[SVGCNodeList alloc] init];
     }
     return self;
 }
 
-- (id)initType:(DOMNodeType) nt name:(NSString*) n
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n
 {
     self = [super init];
     if (self) {
@@ -92,11 +92,11 @@
         switch( nt )
 		{
 				
-			case DOMNodeType_ATTRIBUTE_NODE:
-			case DOMNodeType_CDATA_SECTION_NODE:
-			case DOMNodeType_COMMENT_NODE:
-			case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-			case DOMNodeType_TEXT_NODE:
+			case SVGCNodeType_ATTRIBUTE_NODE:
+			case SVGCNodeType_CDATA_SECTION_NODE:
+			case SVGCNodeType_COMMENT_NODE:
+			case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+			case SVGCNodeType_TEXT_NODE:
 			{
 				NSAssert( FALSE, @"NodeType = %i cannot be init'd without a value; nodes of that type MUST have a value in the DOM spec", nt);
 				
@@ -104,17 +104,17 @@
 			}break;
 				
 				
-			case DOMNodeType_DOCUMENT_NODE:
-			case DOMNodeType_DOCUMENT_TYPE_NODE:
-			case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-			case DOMNodeType_ENTITY_REFERENCE_NODE:
-			case DOMNodeType_ENTITY_NODE:
-			case DOMNodeType_NOTATION_NODE:
+			case SVGCNodeType_DOCUMENT_NODE:
+			case SVGCNodeType_DOCUMENT_TYPE_NODE:
+			case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+			case SVGCNodeType_ENTITY_REFERENCE_NODE:
+			case SVGCNodeType_ENTITY_NODE:
+			case SVGCNodeType_NOTATION_NODE:
 			{
 				self.nodeName = n;
 			}break;
 				
-			case DOMNodeType_ELEMENT_NODE:
+			case SVGCNodeType_ELEMENT_NODE:
 			{
 				
 				self.nodeName = n;
@@ -123,7 +123,7 @@
 			}break;
 		}
 		
-		self.childNodes = [[DOMNodeList alloc] init];
+		self.childNodes = [[SVGCNodeList alloc] init];
     }
     return self;
 }
@@ -140,7 +140,7 @@
 	self.namespaceURI = nsURI;
 }
 
-- (id)initType:(DOMNodeType) nt name:(NSString*) n inNamespace:(NSString*) nsURI
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n inNamespace:(NSString*) nsURI
 {
 	self = [self initType:nt name:n];
 	
@@ -152,7 +152,7 @@
 	return self;
 }
 
-- (id)initType:(DOMNodeType) nt name:(NSString*) n value:(NSString*) v inNamespace:(NSString*) nsURI
+- (id)initType:(SVGCNodeType) nt name:(NSString*) n value:(NSString*) v inNamespace:(NSString*) nsURI
 {
 	if( [v isKindOfClass:[NSMutableString class]])
 	{
@@ -173,7 +173,7 @@
 
 #pragma mark - Official DOM method implementations
 
--(DOMNode *)firstChild
+-(SVGCNode *)firstChild
 {
     if( [self.childNodes length] < 1 )
         return nil;
@@ -181,7 +181,7 @@
         return [self.childNodes item:0];
 }
 
--(DOMNode *)lastChild
+-(SVGCNode *)lastChild
 {
     if( [self.childNodes length] < 1 )
         return nil;
@@ -189,7 +189,7 @@
         return [self.childNodes item: [self.childNodes length] - 1];
 }
 
--(DOMNode *)previousSibling
+-(SVGCNode *)previousSibling
 {
     if( self.parentNode == nil )
         return nil;
@@ -204,7 +204,7 @@
     }
 }
 
--(DOMNode *)nextSibling
+-(SVGCNode *)nextSibling
 {
     if( self.parentNode == nil )
         return nil;
@@ -219,7 +219,7 @@
     }
 }
 
--(DOMNode*) insertBefore:(DOMNode*) newChild refChild:(DOMNode*) refChild
+-(SVGCNode*) insertBefore:(SVGCNode*) newChild refChild:(SVGCNode*) refChild
 {
 	if( refChild == nil )
 	{
@@ -234,9 +234,9 @@
 	return newChild;
 }
 
--(DOMNode*) replaceChild:(DOMNode*) newChild oldChild:(DOMNode*) oldChild
+-(SVGCNode*) replaceChild:(SVGCNode*) newChild oldChild:(SVGCNode*) oldChild
 {
-	if( newChild.nodeType == DOMNodeType_DOCUMENT_FRAGMENT_NODE )
+	if( newChild.nodeType == SVGCNodeType_DOCUMENT_FRAGMENT_NODE )
 	{
 		/** Spec:
 		 
@@ -247,7 +247,7 @@
 		
 		NSAssert( FALSE, @"We should be recursing down the tree to find 'newChild' at any location, and removing it - required by spec - but we have no convenience method for that search, yet" );
 		
-		for( DOMNode* child in newChild.childNodes.internalArray )
+		for( SVGCNode* child in newChild.childNodes.internalArray )
 		{
 			[self.childNodes.internalArray insertObject:child atIndex:oldIndex++];
 		}
@@ -267,7 +267,7 @@
 		return oldChild;
 	}
 }
--(DOMNode*) removeChild:(DOMNode*) oldChild
+-(SVGCNode*) removeChild:(SVGCNode*) oldChild
 {
 	[self.childNodes.internalArray removeObject:oldChild];
 	
@@ -276,7 +276,7 @@
 	return oldChild;
 }
 
--(DOMNode*) appendChild:(DOMNode*) newChild
+-(SVGCNode*) appendChild:(SVGCNode*) newChild
 {
 	[self.childNodes.internalArray removeObject:newChild]; // required by spec
 	[self.childNodes.internalArray addObject:newChild];
@@ -291,7 +291,7 @@
 	return (self.childNodes.length > 0);
 }
 
--(DOMNode*) cloneNode:(BOOL) deep
+-(SVGCNode*) cloneNode:(BOOL) deep
 {
 	NSAssert( FALSE, @"Not implemented yet - read the spec. Sounds tricky. I'm too tired, and would probably screw it up right now" );
 	return nil;
@@ -337,17 +337,17 @@
 {
 	switch( self.nodeType )
 	{
-		case DOMNodeType_ELEMENT_NODE:
-		case DOMNodeType_ATTRIBUTE_NODE:
-		case DOMNodeType_ENTITY_NODE:
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
 		{
 			/** DOM 3 Spec:
 			 "concatenation of the textContent attribute value of every child node, excluding COMMENT_NODE and PROCESSING_INSTRUCTION_NODE nodes. This is the empty string if the node has no children."
 			 */
 			NSMutableString* stringAccumulator = [[NSMutableString alloc] init];
-			for( DOMNode* subNode in self.childNodes.internalArray )
+			for( SVGCNode* subNode in self.childNodes.internalArray )
 			{
 				NSString* subText = subNode.textContent; // don't call this method twice; it's expensive to calculate!
 				if( subText != nil ) // Yes, really: Apple docs require that you never append a nil substring. Sigh
@@ -357,17 +357,17 @@
 			return [NSString stringWithString:stringAccumulator];
 		}
 			
-		case DOMNodeType_TEXT_NODE:
-		case DOMNodeType_CDATA_SECTION_NODE:
-		case DOMNodeType_COMMENT_NODE:
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_TEXT_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_COMMENT_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
 		{
 			return self.nodeValue; // should never be nil; anything with a valid value will be at least an empty string i.e. ""
 		}
 			
-		case DOMNodeType_DOCUMENT_NODE:
-		case DOMNodeType_NOTATION_NODE:
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_NOTATION_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
 		{
 			return nil;
 		}
@@ -381,40 +381,40 @@
 	NSString* nodeTypeName;
 	switch( self.nodeType )
 	{
-		case DOMNodeType_ELEMENT_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
 			nodeTypeName = @"ELEMENT";
 			break;
-		case DOMNodeType_TEXT_NODE:
+		case SVGCNodeType_TEXT_NODE:
 			nodeTypeName = @"TEXT";
 			break;
-		case DOMNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_NODE:
 			nodeTypeName = @"ENTITY";
 			break;
-		case DOMNodeType_COMMENT_NODE:
+		case SVGCNodeType_COMMENT_NODE:
 			nodeTypeName = @"COMMENT";
 			break;
-		case DOMNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
 			nodeTypeName = @"DOCUMENT";
 			break;
-		case DOMNodeType_NOTATION_NODE:
+		case SVGCNodeType_NOTATION_NODE:
 			nodeTypeName = @"NOTATION";
 			break;
-		case DOMNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
 			nodeTypeName = @"ATTRIBUTE";
 			break;
-		case DOMNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
 			nodeTypeName = @"CDATA";
 			break;
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
 			nodeTypeName = @"DOC TYPE";
 			break;
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
 			nodeTypeName = @"ENTITY REF";
 			break;
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
 			nodeTypeName = @"DOC FRAGMENT";
 			break;
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
 			nodeTypeName = @"PROCESSING INSTRUCTION";
 			break;
 			
@@ -444,40 +444,40 @@
 	/** Opening */
 	switch( self.nodeType )
 	{
-		case DOMNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
 		{
 			// ?
 		}break;
 			
-		case DOMNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
 		{
 			[outputString appendFormat:@"<!--"];
 		}break;
 			
-		case DOMNodeType_COMMENT_NODE:
+		case SVGCNodeType_COMMENT_NODE:
 		{
 			[outputString appendFormat:@"<![CDATA["];
 		}break;
 			
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-		case DOMNodeType_DOCUMENT_NODE:
-		case DOMNodeType_ELEMENT_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
 		{
 			[outputString appendFormat:@"<%@", self.nodeName];
 		}break;
 			
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
-		case DOMNodeType_ENTITY_NODE:
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
-		case DOMNodeType_NOTATION_NODE:
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-		case DOMNodeType_TEXT_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_NOTATION_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_TEXT_NODE:
 		{
 			// ?
 		}break;
 	}
 	
-	/** ATTRIBUTES on the node (generally only applies to things of type "DOMNodeType_ELEMENT_NODE") */
+	/** ATTRIBUTES on the node (generally only applies to things of type "SVGCNodeType_ELEMENT_NODE") */
 	NSDictionary* nodeMapsByNamespace = [self.attributes allNodesUnsortedDOM2];
 	NSMutableDictionary* newlyActivatedPrefixesByNamespace = [NSMutableDictionary dictionary];
 	/**
@@ -487,7 +487,7 @@
 	/** ... output them, making them 'active' in the output tree */
 	for( NSString* xmlnsNodeName in xmlnsNodemap )
 	{
-		DOMNode* attribute = [xmlnsNodemap objectForKey:xmlnsNodeName];
+		SVGCNode* attribute = [xmlnsNodemap objectForKey:xmlnsNodeName];
 		
 		if( [prefixesByACTIVENamespace objectForKey:xmlnsNodeName] == nil )
 		{
@@ -534,7 +534,7 @@
 		NSDictionary* nodeMap = [nodeMapsByNamespace objectForKey:namespace];
 		for( NSString* nodeNameFromMap in nodeMap )
 		{
-			DOMNode* attribute = [nodeMap objectForKey:nodeNameFromMap];
+			SVGCNode* attribute = [nodeMap objectForKey:nodeNameFromMap];
 			
 			attribute.prefix = localPrefix; /** Overrides any default pre-existing value */
 			
@@ -550,26 +550,26 @@
 	[prefixesByACTIVENamespace addEntriesFromDictionary:newlyActivatedPrefixesByNamespace];
 	switch( self.nodeType )
 	{
-		case DOMNodeType_ATTRIBUTE_NODE:
-		case DOMNodeType_CDATA_SECTION_NODE:
-		case DOMNodeType_COMMENT_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_COMMENT_NODE:
 		{
 			// nothing
 		}break;
 			
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-		case DOMNodeType_DOCUMENT_NODE:
-		case DOMNodeType_ELEMENT_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
 		{
 			[outputString appendString:@">"];
 		}break;
 			
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
-		case DOMNodeType_ENTITY_NODE:
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
-		case DOMNodeType_NOTATION_NODE:
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-		case DOMNodeType_TEXT_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_NOTATION_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_TEXT_NODE:
 		{
 			// nothing
 		}break;
@@ -578,24 +578,24 @@
 	/** Middle: include child nodes (only applies to some nodes - others will have values, others will have simply "zero children") */
 	switch( self.nodeType )
 	{
-		case DOMNodeType_ATTRIBUTE_NODE:
-		case DOMNodeType_CDATA_SECTION_NODE:
-		case DOMNodeType_COMMENT_NODE:
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
-		case DOMNodeType_ENTITY_NODE:
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
-		case DOMNodeType_NOTATION_NODE:
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-		case DOMNodeType_TEXT_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_COMMENT_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_NOTATION_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_TEXT_NODE:
 		{
 			[outputString appendString:self.nodeValue];
 		}break;
 			
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-		case DOMNodeType_DOCUMENT_NODE:
-		case DOMNodeType_ELEMENT_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
 		{
-			for( DOMNode* child in self.childNodes )
+			for( SVGCNode* child in self.childNodes )
 			{
 				[child appendXMLToString:outputString availableNamespaces:prefixesByKNOWNNamespace activeNamespaces:prefixesByACTIVENamespace];
 			}
@@ -605,34 +605,34 @@
 	/** End: close any nodes that opened an XML tag, or an XML comment or CDATA, during Opening */
 	switch( self.nodeType )
 	{
-		case DOMNodeType_ATTRIBUTE_NODE:
+		case SVGCNodeType_ATTRIBUTE_NODE:
 		{
 			// nothing
 		}break;
 		
-		case DOMNodeType_CDATA_SECTION_NODE:
+		case SVGCNodeType_CDATA_SECTION_NODE:
 		{
 			[outputString appendFormat:@"-->"];
 		}break;
 			
-		case DOMNodeType_COMMENT_NODE:
+		case SVGCNodeType_COMMENT_NODE:
 		{
 			[outputString appendFormat:@"]]>"];
 		}break;
 		
-		case DOMNodeType_DOCUMENT_FRAGMENT_NODE:
-		case DOMNodeType_DOCUMENT_NODE:
-		case DOMNodeType_ELEMENT_NODE:
+		case SVGCNodeType_DOCUMENT_FRAGMENT_NODE:
+		case SVGCNodeType_DOCUMENT_NODE:
+		case SVGCNodeType_ELEMENT_NODE:
 		{
 			[outputString appendFormat:@"</%@>", self.nodeName];
 		}break;
 			
-		case DOMNodeType_DOCUMENT_TYPE_NODE:
-		case DOMNodeType_ENTITY_NODE:
-		case DOMNodeType_ENTITY_REFERENCE_NODE:
-		case DOMNodeType_NOTATION_NODE:
-		case DOMNodeType_PROCESSING_INSTRUCTION_NODE:
-		case DOMNodeType_TEXT_NODE:
+		case SVGCNodeType_DOCUMENT_TYPE_NODE:
+		case SVGCNodeType_ENTITY_NODE:
+		case SVGCNodeType_ENTITY_REFERENCE_NODE:
+		case SVGCNodeType_NOTATION_NODE:
+		case SVGCNodeType_PROCESSING_INSTRUCTION_NODE:
+		case SVGCNodeType_TEXT_NODE:
 		{
 			// nothing
 		}break;

@@ -60,16 +60,16 @@
 	return nil;
 }
 
--(DOMNodeList*) getElementsByTagName:(NSString*) data
+-(SVGCNodeList*) getElementsByTagName:(NSString*) data
 {
-	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
+	SVGCNodeList* accumulator = [[SVGCNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:data inNamespace:nil childrenOfElement:self.documentElement addToList:accumulator];
 	
 	return accumulator;
 }
 
 // Introduced in DOM Level 2:
--(DOMNode*) importNode:(DOMNode*) importedNode deep:(BOOL) deep
+-(SVGCNode*) importNode:(SVGCNode*) importedNode deep:(BOOL) deep
 {
 	NSAssert( FALSE, @"Not implemented." );
 	return nil;
@@ -94,9 +94,9 @@
 }
 
 // Introduced in DOM Level 2:
--(DOMNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
+-(SVGCNodeList*) getElementsByTagNameNS:(NSString*) namespaceURI localName:(NSString*) localName
 {
-	DOMNodeList* accumulator = [[DOMNodeList alloc] init];
+	SVGCNodeList* accumulator = [[SVGCNodeList alloc] init];
 	[DOMHelperUtilities privateGetElementsByName:localName inNamespace:namespaceURI childrenOfElement:self.documentElement addToList:accumulator];
 	
 	return accumulator;

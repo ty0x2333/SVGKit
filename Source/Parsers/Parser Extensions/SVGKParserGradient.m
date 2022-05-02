@@ -37,9 +37,9 @@
     return _supportedTags;
 }
 
--(DOMNode *)handleStartElement:(NSString *)name document:(SVGKSource *)document namePrefix:(NSString *)prefix namespaceURI:(NSString *)XMLNSURI attributes:(NSMutableDictionary *)attributes parseResult:(SVGKParseResult *)parseResult parentNode:(DOMNode *)parentNode
+-(SVGCNode *)handleStartElement:(NSString *)name document:(SVGKSource *)document namePrefix:(NSString *)prefix namespaceURI:(NSString *)XMLNSURI attributes:(NSMutableDictionary *)attributes parseResult:(SVGKParseResult *)parseResult parentNode:(SVGCNode *)parentNode
 {    
-    DOMNode *returnObject = nil;
+    SVGCNode *returnObject = nil;
     
     if( [name isEqualToString:@"linearGradient"] )
     {
@@ -86,7 +86,7 @@
     return returnObject;
 }
 
--(void)handleEndElement:(DOMNode *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
+-(void)handleEndElement:(SVGCNode *)newNode document:(SVGKSource *)document parseResult:(SVGKParseResult *)parseResult
 {
 	
 }

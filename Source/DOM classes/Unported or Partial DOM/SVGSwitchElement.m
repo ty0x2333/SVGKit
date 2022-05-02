@@ -18,12 +18,12 @@
     return _layer;
 }
 
-- (DOMNodeList *)visibleChildNodes
+- (SVGCNodeList *)visibleChildNodes
 {
     if (_visibleChildNodes)
         return _visibleChildNodes;
     
-    _visibleChildNodes = [[DOMNodeList alloc] init];
+    _visibleChildNodes = [[SVGCNodeList alloc] init];
     
     NSString* localLanguage = [[NSLocale preferredLanguages] firstObject];
     

@@ -62,7 +62,7 @@
 
 #pragma mark - a few raw DOM imports are required for SVG DOM, but not many
 #import "Element.h"
-#import "DOMNodeList.h"
+#import "SVGCNodeList.h"
 
 #import "ConverterSVGToCALayer.h"
 #import "SVGKSource.h"
@@ -101,8 +101,8 @@
 -(BOOL) animationsPaused;
 -(float) getCurrentTime;
 -(void) setCurrentTime:(float) seconds;
--(DOMNodeList*) getIntersectionList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement;
--(DOMNodeList*) getEnclosureList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement;
+-(SVGCNodeList*) getIntersectionList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement;
+-(SVGCNodeList*) getEnclosureList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement;
 -(BOOL) checkIntersection:(SVGElement*) element rect:(SVGRect) rect;
 -(BOOL) checkEnclosure:(SVGElement*) element rect:(SVGRect) rect;
 -(void) deselectAll;

@@ -13,10 +13,10 @@
 
 #import <Foundation/Foundation.h>
 
-/** objc won't allow this: @class DOMNode;*/
-#import "DOMNode.h"
+/** objc won't allow this: @class SVGCNode;*/
+#import "SVGCNode.h"
 
-@interface ProcessingInstruction : DOMNode
+@interface ProcessingInstruction : SVGCNode
 @property(nonatomic,strong,readonly) NSString* target;
 @property(nonatomic,strong,readonly) NSString* data;
 

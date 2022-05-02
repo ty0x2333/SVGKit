@@ -652,8 +652,8 @@ static NSMutableDictionary* globalSVGKImageCache;
 	
 	//DEBUG: SVGKitLogVerbose(@"[%@] DEBUG: converted SVG element (class:%@) to CALayer (class:%@ frame:%@ pointer:%@) for id = %@", [self class], NSStringFromClass([element class]), NSStringFromClass([layer class]), NSStringFromCGRect( layer.frame ), layer, element.identifier);
 	
-	DOMNodeList* childNodes = element.childNodes;
-	DOMNode* saveParentNode = nil;
+	SVGCNodeList* childNodes = element.childNodes;
+	SVGCNode* saveParentNode = nil;
 	/**
 	 Special handling for <use> tags - they have to masquerade invisibly as the node they are referring to
 	 */
@@ -665,7 +665,7 @@ static NSMutableDictionary* globalSVGKImageCache;
 		saveParentNode = element.parentNode;
 		element.parentNode = useElement;
 
-		DOMNodeList* nodeList = [[DOMNodeList alloc] init];
+		SVGCNodeList* nodeList = [[SVGCNodeList alloc] init];
 		[nodeList.internalArray addObject:element];
 		childNodes = nodeList;
     }

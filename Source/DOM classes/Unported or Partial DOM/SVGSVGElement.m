@@ -69,8 +69,8 @@
 -(BOOL) animationsPaused { NSAssert( FALSE, @"Not implemented yet" ); return TRUE; }
 -(float) getCurrentTime { NSAssert( FALSE, @"Not implemented yet" ); return 0.0; }
 -(void) setCurrentTime:(float) seconds { NSAssert( FALSE, @"Not implemented yet" ); }
--(DOMNodeList*) getIntersectionList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement { NSAssert( FALSE, @"Not implemented yet" ); return nil; }
--(DOMNodeList*) getEnclosureList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement { NSAssert( FALSE, @"Not implemented yet" ); return nil; }
+-(SVGCNodeList*) getIntersectionList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement { NSAssert( FALSE, @"Not implemented yet" ); return nil; }
+-(SVGCNodeList*) getEnclosureList:(SVGRect) rect referenceElement:(SVGElement*) referenceElement { NSAssert( FALSE, @"Not implemented yet" ); return nil; }
 -(BOOL) checkIntersection:(SVGElement*) element rect:(SVGRect) rect { NSAssert( FALSE, @"Not implemented yet" ); return FALSE; }
 -(BOOL) checkEnclosure:(SVGElement*) element rect:(SVGRect) rect { NSAssert( FALSE, @"Not implemented yet" ); return FALSE; }
 -(void) deselectAll { NSAssert( FALSE, @"Not implemented yet" );}
